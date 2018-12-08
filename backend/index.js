@@ -2,6 +2,12 @@ var express = require('express')
 
 var app = express()
 
+app.use(function(req, res, next){
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+    next();
+})
+
 app.get('/', function(req, res){
     const result = {
         products: [{
@@ -17,6 +23,10 @@ app.get('/', function(req, res){
             price: 20,
             color: "Gris",
             connection: "Bluetooth"
+        }, {
+            title: "Laptop",
+            price: 1200,
+            color: "Gris"
         }]
     }
     res.send(JSON.stringify(result))
